@@ -164,6 +164,7 @@
       "additionalProperties": false,
       "required": [
         "resultingAuthPath",
+        "enrollmentResumePath",
         "requiredMode"
       ],
       "properties": {
@@ -172,6 +173,9 @@
         },
         "requiredMode": {
           "const": "0600"
+        },
+        "enrollmentResumePath": {
+          "const": "/home/user/.conduit_enrollment.json"
         }
       }
     }
