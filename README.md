@@ -19,7 +19,7 @@ python3 candidate/conduit_candidate.py verify --workspace /home/user/conduit-can
 
 ## Arena upload fallback
 
-Arena may reject `.py` uploads. Releases also provide `conduit_candidate_source.txt`, byte-identical to `candidate/conduit_candidate.py`. The agent may inspect and checksum the text source, then copy it to `/home/user/conduit_candidate.py` itself.
+Arena may reject `.py` uploads. Releases also provide `conduit_candidate_source.txt`, byte-identical to `candidate/conduit_candidate.py`, plus basename-oriented `RELEASE_SHA256SUMS.txt` for files downloaded from the release page. The agent may inspect and checksum the text source, then copy it to `/home/user/conduit_candidate.py` itself.
 
 ## Evidence limits
 
