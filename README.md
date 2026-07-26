@@ -26,3 +26,7 @@ Arena may reject `.py` uploads. Releases also provide `conduit_candidate_source.
 The verifier is public and candidate-controlled. It cannot observe chat disclosure or network use and does not establish model identity. Reports use `COMPLETE`, `REVIEW_REQUIRED`, `INCOMPLETE`, or `INVALID_EVIDENCE`—never `PASS`, `TRUSTED`, or `AUTHORIZED`.
 
 See `docs/architecture.md`, `docs/threat-model.md`, and `docs/human-review-guide.md`.
+
+## Provisioning bootstrap delivery
+
+Arena provisioning uploads intentionally contain only Markdown and JSON—not `bootstrap_conduit_client.py`. The signed-off envelope supplies the exact authorized `bootstrap.url` and SHA-256. The agent downloads from that URL, verifies the hash before using the one-time invite, and stops on any URL or digest mismatch.

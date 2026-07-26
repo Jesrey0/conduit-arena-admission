@@ -144,9 +144,15 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "url",
         "sha256"
       ],
       "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
         "sha256": {
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
