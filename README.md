@@ -34,3 +34,7 @@ Arena provisioning uploads intentionally contain only Markdown and JSON—not `b
 ## Resumable approval
 
 Pending enrollment is interruption-safe. Bootstrap stores a server-, invite-, and provisioning-bound request capability at `/home/user/.conduit_enrollment.json` with mode `0600`; it does not store the invite secret. The same command resumes token retrieval after approval, and the file is deleted only after credential verification and atomic auth persistence. After the first approved-token response, recovery is bounded to two hours; an inaccessible client outside that window must be revoked and reprovisioned.
+
+## Authorization contract v2
+
+Provisioning schema v2 makes `LIVE_PROBATION` and `REGULAR_OPERATOR_PROMOTION` machine-readable and includes a generated controlling-operator confirmation for conservative agents. Timestamps are absolute ISO-8601 instants, and Arena invitation windows default to two hours.
