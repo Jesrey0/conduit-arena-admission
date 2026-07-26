@@ -30,3 +30,7 @@ See `docs/architecture.md`, `docs/threat-model.md`, and `docs/human-review-guide
 ## Provisioning bootstrap delivery
 
 Arena provisioning uploads intentionally contain only Markdown and JSON—not `bootstrap_conduit_client.py`. The signed-off envelope supplies the exact authorized `bootstrap.url` and SHA-256. The agent downloads from that URL, verifies the hash before using the one-time invite, and stops on any URL or digest mismatch.
+
+## Resumable approval
+
+Pending enrollment is interruption-safe. Bootstrap stores a server-, invite-, and provisioning-bound request capability at `/home/user/.conduit_enrollment.json` with mode `0600`; it does not store the invite secret. The same command resumes token retrieval after approval, and the file is deleted only after credential verification and atomic auth persistence. After the first approved-token response, recovery is bounded to two hours; an inaccessible client outside that window must be revoked and reprovisioned.
