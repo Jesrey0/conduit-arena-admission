@@ -1,4 +1,6 @@
 import json
+import ast
+import hashlib
 import os
 import stat
 import subprocess
@@ -27,6 +29,18 @@ class CandidateWorkflowTests(unittest.TestCase):
             self.assertFalse(result["writesFiles"])
             self.assertFalse(result["networkOperations"])
             self.assertEqual(before, set(Path(td).iterdir()))
+
+    def test_source_has_no_network_imports_and_upload_fallback_is_identical(self):
+        tree = ast.parse(SCRIPT.read_text())
+        imported = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import): imported.update(alias.name.split(".")[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module: imported.add(node.module.split(".")[0])
+        self.assertTrue(imported.isdisjoint({"socket", "urllib", "http", "requests", "httpx", "asyncio"}))
+        fallback = ROOT / "conduit_candidate_source.txt"
+        self.assertEqual(SCRIPT.read_bytes(), fallback.read_bytes())
+        sums = (ROOT / "SHA256SUMS.txt").read_text()
+        self.assertIn(hashlib.sha256(SCRIPT.read_bytes()).hexdigest(), sums)
 
     def test_complete_candidate_flow(self):
         with tempfile.TemporaryDirectory() as td:
