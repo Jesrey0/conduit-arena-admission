@@ -1,6 +1,8 @@
 # Conduit Arena Agent Provisioning Authorization
 
 Provisioning ID: `<PROVISIONING_ID>`
+Purpose: `<ENROLLMENT|PROMOTE_CLIENT>`
+Replaces client: `<CLIENT_ID_OR_NONE>`
 
 The Primary Principal Operator authorizes the recipient Arena agent to inspect this package and submit one enrollment request using its short-lived, one-time invite. Access is not issued until separate server-side approval.
 
